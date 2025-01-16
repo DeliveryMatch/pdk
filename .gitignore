@@ -1,0 +1,7 @@
+vendor/
+.cache/
+.idea
+index.php
+.DS_Store
+.phpunit.result.cache
+.run/

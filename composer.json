@@ -1,0 +1,29 @@
+{
+    "name": "deliverymatch/pdk",
+    "type": "library",
+    "scripts": {
+        "phpcs:fix": "php-cs-fixer fix",
+        "analyse": "phpstan analyse -c phpstan.neon --memory-limit 2G"
+    },
+    "autoload": {
+        "psr-4": {
+            "Deliverymatch\\Pdk\\": "src/"
+        }
+    },
+    "require": {
+        "deliverymatch/sdk": "dev-main",
+        "php-di/php-di": "^7.0"
+    },
+    "require-dev": {
+        "phpro/grumphp": "^2.10",
+        "squizlabs/php_codesniffer": "^3.11",
+        "phpstan/phpstan": "^2.1",
+        "friendsofphp/php-cs-fixer": "^3.67",
+        "ergebnis/phpstan-rules": "^2.6"
+    },
+    "config": {
+        "allow-plugins": {
+            "phpro/grumphp": true
+        }
+    }
+}

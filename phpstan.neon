@@ -1,0 +1,43 @@
+includes:
+    - vendor/ergebnis/phpstan-rules/rules.neon
+parameters:
+    level: 8
+    tmpDir: .cache/phpstan
+    paths:
+        - src
+    ergebnis:
+        final:
+            enabled: false
+        noExtends:
+            enabled: false
+        testCaseWithSuffix:
+            enabled: false
+        noNullableReturnTypeDeclaration:
+            enabled: false
+        noParameterWithNullableTypeDeclaration:
+            enabled: false
+        noParameterWithNullDefaultValue:
+            enabled: false
+        noParameterWithContainerTypeDeclaration:
+            enabled: false
+        noCompact:
+            enabled: false
+        noEval:
+            enabled: false
+        noErrorSuppression:
+            enabled: false
+        noIsset:
+            enabled: false
+        declareStrictTypes:
+            enabled: true
+        finalInAbstractClass:
+            enabled: false
+        noConstructorParameterWithDefaultValue:
+            enabled: false
+        privateInFinalClass:
+            enabled: false
+        noSwitch:
+            enabled: false
+    ignoreErrors:
+        -
+            identifier: missingType.iterableValue
