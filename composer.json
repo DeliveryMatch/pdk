@@ -12,7 +12,8 @@
     },
     "require": {
         "deliverymatch/sdk": "dev-main",
-        "php-di/php-di": "^7.0"
+        "php-di/php-di": "^7.0",
+        "php": ">=7.4"
     },
     "require-dev": {
         "phpro/grumphp": "^2.10",
