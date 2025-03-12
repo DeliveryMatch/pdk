@@ -13,7 +13,9 @@
     "require": {
         "php-di/php-di": "^7.0",
         "php": ">=7.4",
-        "deliverymatch/sdk": "dev-main"
+        "deliverymatch/sdk": "dev-main",
+        "php-http/curl-client": "^2.3",
+        "nyholm/psr7": "^1.8"
     },
     "require-dev": {
         "phpro/grumphp": "^2.10",
@@ -24,7 +26,8 @@
     },
     "config": {
         "allow-plugins": {
-            "phpro/grumphp": true
+            "phpro/grumphp": true,
+            "php-http/discovery": true
         }
     }
 }
