@@ -15,7 +15,7 @@ class PdkBootstrapper implements PdkBootstrapperInterface
     {
     }
 
-    final public static function setup(int $clientId, string $apikey, ...$configs): PdkInterface
+    final public static function setup(int $clientId, string $apikey, array ...$configs): PdkInterface
     {
         if (self::$isInitialized) {
             return self::$pdk;
@@ -32,7 +32,8 @@ class PdkBootstrapper implements PdkBootstrapperInterface
         return PdkFactory::create($clientId, $apikey, ...$this->getAdditionalConfiguration());
     }
 
-    protected function getAdditionalConfiguration(): array {
+    protected function getAdditionalConfiguration(): array
+    {
         return [];
     }
 }

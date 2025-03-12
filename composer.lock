@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "da3163e5abdcf7466c391753e0f81326",
+    "content-hash": "998054b0072337d7c4be8a3831b5da6b",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -78,17 +78,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/DeliveryMatch/sdk.git",
-                "reference": "7d5ec68a0e8b525075ea4b3975a32abffe9a0748"
+                "reference": "9b3bb9ccf13ea6a666e4449ce9719a73828eaaa0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DeliveryMatch/sdk/zipball/7d5ec68a0e8b525075ea4b3975a32abffe9a0748",
-                "reference": "7d5ec68a0e8b525075ea4b3975a32abffe9a0748",
+                "url": "https://api.github.com/repos/DeliveryMatch/sdk/zipball/9b3bb9ccf13ea6a666e4449ce9719a73828eaaa0",
+                "reference": "9b3bb9ccf13ea6a666e4449ce9719a73828eaaa0",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "php": ">=7.4",
+                "php": ">=8.1",
                 "php-http/client-common": "^2.7",
                 "psr/http-client": "^1.0",
                 "psr/http-factory": "^1.1"
@@ -108,7 +108,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "DeliveryMatch\\Api\\": "lib/DeliveryMatch"
+                    "DeliveryMatch\\Sdk\\": "lib/DeliveryMatch"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -116,7 +116,7 @@
                 "issues": "https://github.com/DeliveryMatch/sdk/issues",
                 "source": "https://github.com/DeliveryMatch/sdk/tree/main"
             },
-            "time": "2025-03-12T12:20:29+00:00"
+            "time": "2025-03-12T12:51:14+00:00"
         },
         {
             "name": "laravel/serializable-closure",
@@ -6073,7 +6073,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.4"
+        "php": ">=8.1"
     },
     "platform-dev": [],
     "plugin-api-version": "2.6.0"

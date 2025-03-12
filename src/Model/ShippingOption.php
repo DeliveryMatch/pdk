@@ -4,10 +4,6 @@ declare(strict_types=1);
 
 namespace DeliveryMatch\Pdk\Model;
 
-use DeliveryMaytch\Pdk\Model\Carrier;
-use DeliveryMaytch\Pdk\Model\DeliveryWindow;
-use DeliveryMaytch\Pdk\Model\ServiceLevel;
-
 abstract class ShippingOption
 {
     public function __construct(

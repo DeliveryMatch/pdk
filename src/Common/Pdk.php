@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace DeliveryMatch\Pdk\Common;
 
-use DeliveryMatch\Api\Dto\Request\ShipmentRequest;
-use DeliveryMatch\Client;
+use DeliveryMatch\Sdk\Api\Dto\Request\ShipmentRequest;
+use DeliveryMatch\Sdk\Client;
 use DI\Container;
+use Http\Client\Exception;
+use JsonException;
 
 class Pdk implements PdkInterface
 {
@@ -24,11 +26,13 @@ class Pdk implements PdkInterface
         return $this->container->has($key);
     }
 
-    public function api(): Client {
+    public function api(): Client
+    {
         return $this->container->get("api");
     }
 
-    public function checkConnection(): bool {
+    public function checkConnection(): bool
+    {
         $api = $this->api();
 
         $response = $api->me()->isAuthenticated();
@@ -36,7 +40,12 @@ class Pdk implements PdkInterface
         return true;
     }
 
-    public function fetchShippingOptions(ShipmentRequest $request): array {
+    /**
+     * @throws Exception
+     * @throws JsonException
+     */
+    public function fetchShippingOptions(ShipmentRequest $request): array
+    {
         $api = $this->api();
 
         if ($request->hasIdentifier()) {

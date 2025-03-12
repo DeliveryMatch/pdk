@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DeliveryMaytch\Pdk\Model;
+namespace DeliveryMatch\Pdk\Model;
 
 class ServiceLevel
 {

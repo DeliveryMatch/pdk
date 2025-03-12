@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace DeliveryMatch\Pdk\Facade;
 
-use DeiveryMatch\Pdk\Facade\Facade;
 use DeliveryMatch\Pdk\Common\PdkInterface;
 
 /**
