@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace DeliveryMatch\Pdk\Factory;
 
 use DeiveryMatch\Pdk\Facade\Facade;
-use DeliveryMatch\Client;
+use DeliveryMatch\Api\Client;
 use DeliveryMatch\Pdk\Common\PdkInterface;
 use DeliveryMatch\Pdk\Common\Pdk;
 use DI\ContainerBuilder;
