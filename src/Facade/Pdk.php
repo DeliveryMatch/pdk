@@ -9,6 +9,7 @@ use DeliveryMatch\Pdk\Common\PdkInterface;
 /**
  * @method static mixed get(string $key)
  * @method static bool has(string $key)
+ * @method static bool me()
  */
 final class Pdk extends Facade
 {
