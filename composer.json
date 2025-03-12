@@ -7,7 +7,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Deliverymatch\\Pdk\\": "src/"
+            "DeliveryMatch\\Pdk\\": "src/"
         }
     },
     "require": {
