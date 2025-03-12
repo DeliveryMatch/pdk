@@ -8,4 +8,5 @@ interface PdkInterface
 {
     public function get(string $key): mixed;
     public function has(string $key): mixed;
+    public function checkConnection(): bool;
 }
