@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DeliveryMatch\Pdk\Common;
 
+use DeliveryMatch\Pdk\Model\Rates;
 use DeliveryMatch\Sdk\Api\Dto\Request\ShipmentRequest;
 
 interface PdkInterface

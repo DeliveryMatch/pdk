@@ -10,7 +10,7 @@ use DeliveryMatch\Pdk\Common\PdkInterface;
  * @method static mixed get(string $key)
  * @method static bool has(string $key)
  * @method static bool checkConnection()
- * @method static Rates fetchShippingOptions(ShipmentRequest $request)
+ * @method static \DeliveryMatch\Pdk\Model\Rates fetchShippingOptions(\DeliveryMatch\Sdk\Api\Dto\Request\ShipmentRequest $request)
  * @see \DeliveryMaytch\Pdk\Common\PdkInterface
  */
 final class Pdk extends Facade
