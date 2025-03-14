@@ -69,55 +69,57 @@ class Pdk implements PdkInterface
         }
 
         $methods = [];
-        foreach ($response['shipmentMethods']['all'] as $method) {
-            $pickupDate = DateTimeImmutable::createFromFormat($format, "{$method['datePickup']} {$method['pickupTime']}");
-            $cutoffDate = DateTimeImmutable::createFromFormat($format, "{$method['datePickup']} {$method['cutoffTime']}");
+        foreach ($response['shipmentMethods']['all'] as $date) {
+            foreach ($date as $method) {
+                $pickupDate = DateTimeImmutable::createFromFormat($format, "{$method['datePickup']} {$method['pickupTime']}");
+                $cutoffDate = DateTimeImmutable::createFromFormat($format, "{$method['datePickup']} {$method['cutoffTime']}");
 
-            if ($pickupDate === false || $cutoffDate === false) {
-                continue;
+                if ($pickupDate === false || $cutoffDate === false) {
+                    continue;
+                }
+
+                if (isset($method['dateDelivery'])) {
+                    $deliveryDateFrom = DateTimeImmutable::createFromFormat($format, "{$method['dateDelivery']} {$method['timeFrom']}");
+                    $deliveryDateTo = DateTimeImmutable::createFromFormat($format, "{$method['dateDelivery']} {$method['timeTo']}");
+                } else {
+                    $deliveryDateFrom = false;
+                    $deliveryDateTo = false;
+                }
+
+                $methods[] = new HomeDeliveryOption(
+                    methodId: $method['methodID'],
+                    checkId: $method['checkID'],
+                    carrier: new Carrier(
+                        id: $method['carrier']['id'],
+                        name: $method['carrier']['name'],
+                        code: $method['carrier']['code'],
+                    ),
+                    serviceLevel: new ServiceLevel(
+                        id: $method['serviceLevel']['id'],
+                        name: $method['serviceLevel']['name'],
+                        description: $method['serviceLevel']['description'],
+                    ),
+                    configurationId: $method['configurationID'],
+                    tariffId: $method['tariffID'],
+                    routeId: $method['routeID'],
+                    price: new Price(
+                        buy: $method['buy_price'],
+                        sell: $method['price'],
+                        currency: $method['currency']
+                    ),
+                    description: $method['description'],
+                    title: $method['title'] ?? $method['carrier']['name'],
+                    pickupWindow: new PickupWindow(
+                        pickupTime: $pickupDate,
+                        cutoffTime: $cutoffDate
+                    ),
+                    deliveryWindow: $deliveryDateTo && $deliveryDateFrom
+                        ? new DeliveryWindow(
+                            from: $deliveryDateFrom,
+                            to: $deliveryDateTo,
+                        ) : null
+                );
             }
-
-            if (isset($method['dateDelivery'])) {
-                $deliveryDateFrom = DateTimeImmutable::createFromFormat($format, "{$method['dateDelivery']} {$method['timeFrom']}");
-                $deliveryDateTo = DateTimeImmutable::createFromFormat($format, "{$method['dateDelivery']} {$method['timeTo']}");
-            } else {
-                $deliveryDateFrom = false;
-                $deliveryDateTo = false;
-            }
-
-            $methods[] = new HomeDeliveryOption(
-                methodId: $method['methodId'],
-                checkId: $method['checkId'],
-                carrier: new Carrier(
-                    id: $method['carrier']['id'],
-                    name: $method['carrier']['name'],
-                    code: $method['carrier']['code'],
-                ),
-                serviceLevel: new ServiceLevel(
-                    id: $method['serviceLevel']['id'],
-                    name: $method['serviceLevel']['name'],
-                    description: $method['serviceLevel']['description'],
-                ),
-                configurationId: $method['configurationID'],
-                tariffId: $method['tariffID'],
-                routeId: $method['routeID'],
-                price: new Price(
-                    buy: $method['buy_price'],
-                    sell: $method['price'],
-                    currency: $method['currency']
-                ),
-                description: $method['description'],
-                title: $method['title'],
-                pickupWindow: new PickupWindow(
-                    pickupTime: $pickupDate,
-                    cutoffTime: $cutoffDate
-                ),
-                deliveryWindow: $deliveryDateTo && $deliveryDateFrom
-                    ? new DeliveryWindow(
-                        from: $deliveryDateFrom,
-                        to: $deliveryDateTo,
-                    ) : null
-            );
         }
 
         return $methods;
