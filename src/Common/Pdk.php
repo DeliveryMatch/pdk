@@ -10,6 +10,7 @@ use DeliveryMatch\Pdk\Model\DeliveryWindow;
 use DeliveryMatch\Pdk\Model\HomeDeliveryOption;
 use DeliveryMatch\Pdk\Model\PickupWindow;
 use DeliveryMatch\Pdk\Model\Price;
+use DeliveryMatch\Pdk\Model\Rates;
 use DeliveryMatch\Pdk\Model\ServiceLevel;
 use DeliveryMatch\Sdk\Api\Dto\Request\ShipmentRequest;
 use DeliveryMatch\Sdk\Client;
@@ -56,7 +57,7 @@ class Pdk implements PdkInterface
      * @throws Exception
      * @throws JsonException
      */
-    public function fetchShippingOptions(ShipmentRequest $request): array
+    public function fetchShippingOptions(ShipmentRequest $request): Rates
     {
         $format = "Y-m-d H:i";
 
@@ -122,7 +123,10 @@ class Pdk implements PdkInterface
             }
         }
 
-        return $methods;
+        return new Rates(
+            shipmentId: $response["shipmentID"] ?? current($response["shipmentID"]),
+            shippingOptions: $method
+        );
     }
 
 }

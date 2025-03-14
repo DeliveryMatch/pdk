@@ -11,5 +11,5 @@ interface PdkInterface
     public function get(string $key): mixed;
     public function has(string $key): mixed;
     public function checkConnection(): bool;
-    public function fetchShippingOptions(ShipmentRequest $request): array;
+    public function fetchShippingOptions(ShipmentRequest $request): Rates;
 }
