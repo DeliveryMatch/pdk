@@ -124,7 +124,7 @@ class Pdk implements PdkInterface
         }
 
         return new Rates(
-            shipmentId: $response["shipmentID"] ?? current($response["shipmentID"]),
+            shipmentId: is_array($response["shipmentID"]) ? current($response["shipmentID"]) : $response["shipmentID"],
             shippingOptions: $methods
         );
     }
