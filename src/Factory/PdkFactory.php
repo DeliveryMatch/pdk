@@ -19,21 +19,20 @@ class PdkFactory
         $instance = new PdkFactory();
         $container = $instance->setupContainer($clientId, $apiKey, $cache, ...$configs);
 
-        $pdk = new Pdk($container);
+        $pdk = new Pdk($container, $cache);
 
         Facade::setPdkInstance($pdk);
 
         return $pdk;
     }
 
-    private function setupContainer(int $clientId, string $apiKey, Cache $cache, array ...$configs): Container
+    private function setupContainer(int $clientId, string $apiKey, array ...$configs): Container
     {
         $builder = new ContainerBuilder();
         $builder->useAutowiring(true);
         $builder->addDefinitions(
             [
                 "api" => new Client($apiKey, $clientId),
-                "cache" => $cache,
                 PdkInterface::class => \DI\autowire(Pdk::class)
             ],
             ...$configs

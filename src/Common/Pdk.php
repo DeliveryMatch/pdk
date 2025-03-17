@@ -12,6 +12,7 @@ use DeliveryMatch\Pdk\Model\PickupWindow;
 use DeliveryMatch\Pdk\Model\Price;
 use DeliveryMatch\Pdk\Model\Rates;
 use DeliveryMatch\Pdk\Model\ServiceLevel;
+use DeliveryMatch\Pdk\Model\ShippingOption;
 use DeliveryMatch\Sdk\Api\Dto\Request\ShipmentRequest;
 use DeliveryMatch\Sdk\Client;
 use DeliveryMatch\Sdk\Exception\DeliveryMatchApiException;
@@ -21,8 +22,11 @@ use JsonException;
 
 class Pdk implements PdkInterface
 {
-    public function __construct(protected Container $container)
+    public function __construct(protected Container $container, protected Cache $cache) {}
+
+    public function setSelectedOption(string $checkId): void
     {
+        $this->cache->setCheckId($checkId);
     }
 
     public function get(string $key): mixed
@@ -62,7 +66,6 @@ class Pdk implements PdkInterface
         $format = "Y-m-d H:i";
 
         $api = $this->api();
-        $cache = $this->cache();
 
         if ($request->hasIdentifier()) {
             $response = $api->shipments()->update($request);
@@ -126,8 +129,8 @@ class Pdk implements PdkInterface
 
         $shipmentId = is_array($response["shipmentID"]) ? current($response["shipmentID"]) : $response["shipmentID"];
 
-        $cache->setShipmentId($shipmentId);
-        $cache->setShippingOptions($shippingOptions);
+        $this->cache->setShipmentId($shipmentId);
+        $this->cache->setShippingOptions($shippingOptions);
 
         return new Rates(
             shipmentId: $shipmentId,
@@ -135,9 +138,14 @@ class Pdk implements PdkInterface
         );
     }
 
-    public function cache(): Cache
+    public function findShippingOption(): ?ShippingOption
     {
-        return $this->get("cache");
-    }
+        $shippingOption = current(array_filter($this->cache->getShippingOptions(), fn(ShippingOption $option) => $option->checkId === $this->cache->getCheckId()));
 
+        if (!$shippingOption) {
+            return null;
+        }
+
+        return $shippingOption;
+    }
 }
