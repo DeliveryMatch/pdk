@@ -62,6 +62,7 @@ class Pdk implements PdkInterface
         $format = "Y-m-d H:i";
 
         $api = $this->api();
+        $cache = $this->cache();
 
         if ($request->hasIdentifier()) {
             $response = $api->shipments()->update($request);
@@ -69,7 +70,7 @@ class Pdk implements PdkInterface
             $response = $api->shipments()->insert($request);
         }
 
-        $methods = [];
+        $shippingOptions = [];
         foreach ($response['shipmentMethods']['all'] as $date) {
             foreach ($date as $method) {
                 $pickupDate = DateTimeImmutable::createFromFormat($format, "{$method['datePickup']} {$method['pickupTime']}");
@@ -87,7 +88,7 @@ class Pdk implements PdkInterface
                     $deliveryDateTo = false;
                 }
 
-                $methods[] = new HomeDeliveryOption(
+                $shippingOptions[] = new HomeDeliveryOption(
                     methodId: $method['methodID'],
                     checkId: $method['checkID'],
                     carrier: new Carrier(
@@ -123,10 +124,20 @@ class Pdk implements PdkInterface
             }
         }
 
+        $shipmentId = is_array($response["shipmentID"]) ? current($response["shipmentID"]) : $response["shipmentID"];
+
+        $cache->setShipmentId($shipmentId);
+        $cache->setShippingOptions($shippingOptions);
+
         return new Rates(
-            shipmentId: is_array($response["shipmentID"]) ? current($response["shipmentID"]) : $response["shipmentID"],
-            shippingOptions: $methods
+            shipmentId: $shipmentId,
+            shippingOptions: $shippingOptions
         );
+    }
+
+    public function cache(): Cache
+    {
+        return $this->get("cache");
     }
 
 }
