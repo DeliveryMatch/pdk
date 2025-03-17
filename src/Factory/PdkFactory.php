@@ -17,7 +17,7 @@ class PdkFactory
     public static function create(int $clientId, string $apiKey, Cache $cache, array ...$configs): PdkInterface
     {
         $instance = new PdkFactory();
-        $container = $instance->setupContainer($clientId, $apiKey, $cache, ...$configs);
+        $container = $instance->setupContainer($clientId, $apiKey, ...$configs);
 
         $pdk = new Pdk($container, $cache);
 

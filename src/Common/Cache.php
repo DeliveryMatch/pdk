@@ -23,7 +23,7 @@ interface Cache
      */
     public function getShippingOptions(string $key = "dm_shipping_options"): array;
 
-    public function setCheckId(int $checkId, string $key = "dm_check_id"): void;
+    public function setCheckId(string $checkId, string $key = "dm_check_id"): void;
     public function getCheckId(string $key = "dm_check_id"): ?string;
 
     public function flush(array $keys = ["dm_check_id", "dm_shipping_options", "dm_shipment_id"]): void;

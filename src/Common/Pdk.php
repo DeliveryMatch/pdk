@@ -22,7 +22,9 @@ use JsonException;
 
 class Pdk implements PdkInterface
 {
-    public function __construct(protected Container $container, protected Cache $cache) {}
+    public function __construct(protected Container $container, protected Cache $cache)
+    {
+    }
 
     public function setSelectedOption(string $checkId): void
     {
@@ -140,7 +142,7 @@ class Pdk implements PdkInterface
 
     public function findShippingOption(): ?ShippingOption
     {
-        $shippingOption = current(array_filter($this->cache->getShippingOptions(), fn(ShippingOption $option) => $option->checkId === $this->cache->getCheckId()));
+        $shippingOption = current(array_filter($this->cache->getShippingOptions(), fn (ShippingOption $option) => $option->checkId === $this->cache->getCheckId()));
 
         if (!$shippingOption) {
             return null;
