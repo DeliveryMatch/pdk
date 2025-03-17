@@ -17,6 +17,8 @@ use DeliveryMatch\Sdk\Api\Dto\Request\ShipmentRequest;
 use DeliveryMatch\Sdk\Client;
 use DeliveryMatch\Sdk\Exception\DeliveryMatchApiException;
 use DI\Container;
+use DI\DependencyException;
+use DI\NotFoundException;
 use Http\Client\Exception;
 use JsonException;
 
@@ -31,6 +33,10 @@ class Pdk implements PdkInterface
         $this->cache->setCheckId($checkId);
     }
 
+    /**
+     * @throws DependencyException
+     * @throws NotFoundException
+     */
     public function get(string $key): mixed
     {
         return $this->container->get($key);

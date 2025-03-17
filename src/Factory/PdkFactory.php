@@ -14,10 +14,10 @@ use DI\ContainerBuilder;
 
 class PdkFactory
 {
-    public static function create(int $clientId, string $apiKey, Cache $cache, array ...$configs): PdkInterface
+    public static function create(int $clientId, string $apiKey, Cache $cache, array $configs): PdkInterface
     {
-        $instance = new PdkFactory();
-        $container = $instance->setupContainer($clientId, $apiKey, ...$configs);
+        $instance = new self();
+        $container = $instance->setupContainer($clientId, $apiKey, $configs);
 
         $pdk = new Pdk($container, $cache);
 
@@ -26,7 +26,7 @@ class PdkFactory
         return $pdk;
     }
 
-    private function setupContainer(int $clientId, string $apiKey, array ...$configs): Container
+    private function setupContainer(int $clientId, string $apiKey, array $configs): Container
     {
         $builder = new ContainerBuilder();
         $builder->useAutowiring(true);
@@ -35,7 +35,7 @@ class PdkFactory
                 "api" => new Client($apiKey, $clientId),
                 PdkInterface::class => \DI\autowire(Pdk::class)
             ],
-            ...$configs
+            $configs
         );
 
         return $builder->build();

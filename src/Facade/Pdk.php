@@ -11,9 +11,9 @@ use DeliveryMatch\Pdk\Common\PdkInterface;
  * @method static bool has(string $key)
  * @method static bool checkConnection()
  * @method static \DeliveryMatch\Pdk\Model\Rates fetchShippingOptions(\DeliveryMatch\Sdk\Api\Dto\Request\ShipmentRequest $request)
- * @method static \DeliveryMatch\Pdk\Model\ShippingOption|null getSelectedShippingOption()
+ * @method static \DeliveryMatch\Pdk\Model\ShippingOption|null findShippingOption()
  * @method static void setSelectedOption(string $checkId)
- * @see \DeliveryMaytch\Pdk\Common\PdkInterface
+ * @see \DeliveryMatch\Pdk\Common\Pdk
  */
 final class Pdk extends Facade
 {

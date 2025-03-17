@@ -29,7 +29,7 @@ class PdkBootstrapper implements PdkBootstrapperInterface
 
     protected function createInstance(int $clientId, string $apikey, Cache $cache): PdkInterface
     {
-        return PdkFactory::create($clientId, $apikey, $cache, ...$this->getAdditionalConfiguration());
+        return PdkFactory::create($clientId, $apikey, $cache, $this->getAdditionalConfiguration());
     }
 
     protected function getAdditionalConfiguration(): array
