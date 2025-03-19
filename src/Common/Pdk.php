@@ -156,4 +156,24 @@ class Pdk implements PdkInterface
 
         return $shippingOption;
     }
+
+    public function addShippingOptionToShipment(): bool
+    {
+        $api = $this->api();
+
+        $shippingOption = $this->findShippingOption();
+        $shipmentId = $this->cache->getShipmentId();
+
+        if ($shippingOption === null || $shipmentId === null) {
+            return false;
+        }
+
+        try {
+            $api->shipments()->selectMethod($shipmentId, $shippingOption->methodId);
+        } catch (DeliveryMatchApiException $e) {
+            return false;
+        }
+
+        return true;
+    }
 }

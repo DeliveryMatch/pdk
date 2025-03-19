@@ -13,6 +13,7 @@ use DeliveryMatch\Pdk\Common\PdkInterface;
  * @method static \DeliveryMatch\Pdk\Model\Rates fetchShippingOptions(\DeliveryMatch\Sdk\Api\Dto\Request\ShipmentRequest $request)
  * @method static \DeliveryMatch\Pdk\Model\ShippingOption|null findShippingOption()
  * @method static void setSelectedOption(string $checkId)
+ * @method static bool addShippingOptionToShipment()
  * @see \DeliveryMatch\Pdk\Common\Pdk
  */
 final class Pdk extends Facade

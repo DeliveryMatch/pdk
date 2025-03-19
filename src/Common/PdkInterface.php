@@ -16,4 +16,5 @@ interface PdkInterface
     public function fetchShippingOptions(ShipmentRequest $request): Rates;
     public function findShippingOption(): ?ShippingOption;
     public function setSelectedOption(string $checkId): void;
+    public function addShippingOptionToShipment(): bool;
 }
