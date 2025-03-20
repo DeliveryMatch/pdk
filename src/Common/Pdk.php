@@ -14,6 +14,7 @@ use DeliveryMatch\Pdk\Model\Rates;
 use DeliveryMatch\Pdk\Model\ServiceLevel;
 use DeliveryMatch\Pdk\Model\ShippingOption;
 use DeliveryMatch\Sdk\Api\Dto\Request\ShipmentRequest;
+use DeliveryMatch\Sdk\Api\HttpClient\Message\Json;
 use DeliveryMatch\Sdk\Client;
 use DeliveryMatch\Sdk\Exception\DeliveryMatchApiException;
 use DI\Container;
@@ -170,6 +171,28 @@ class Pdk implements PdkInterface
 
         try {
             $api->shipments()->selectMethod($shipmentId, $shippingOption->methodId);
+        } catch (DeliveryMatchApiException $e) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function updateShipmentStatus(int $shipmentId, int $clientId, string $status = 'new'): bool {
+        $httpClient = $this->api()->getHttpClient();
+
+        $request = [
+            "client" => [
+                "id" => $clientId
+            ],
+            "shipment" => [
+                "id" => $shipmentId,
+                "status" => $status
+            ]
+        ];
+
+        try {
+            $httpClient->post("/updateShipment", body: Json::encode($request));
         } catch (DeliveryMatchApiException $e) {
             return false;
         }
