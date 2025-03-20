@@ -178,18 +178,22 @@ class Pdk implements PdkInterface
         return true;
     }
 
-    public function updateShipmentStatus(int $shipmentId, int $clientId, string $status = 'new'): bool {
+    public function updateShipmentToNew(int $shipmentId, ?string $orderNumber = null): bool {
         $httpClient = $this->api()->getHttpClient();
 
         $request = [
             "client" => [
-                "id" => $clientId
+                "id" => $this->get("clientId")
             ],
             "shipment" => [
                 "id" => $shipmentId,
-                "status" => $status
+                "status" => 'new'
             ]
         ];
+
+        if ($orderNumber !== null) {
+            $request["shipment"]["orderNumber"] = $orderNumber;
+        }
 
         try {
             $httpClient->post("/updateShipment", body: Json::encode($request));

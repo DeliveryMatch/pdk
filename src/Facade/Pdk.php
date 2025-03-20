@@ -14,7 +14,7 @@ use DeliveryMatch\Pdk\Common\PdkInterface;
  * @method static \DeliveryMatch\Pdk\Model\ShippingOption|null findShippingOption()
  * @method static void setSelectedOption(string $checkId)
  * @method static bool addShippingOptionToShipment()
- * @method static bool updateShipmentStatus(int $shipmentId, int $clientId, string $status = 'new')
+ * @method static bool updateShipmentStatus(int $shipmentId, ?string $orderNumber = null)
  * @see \DeliveryMatch\Pdk\Common\Pdk
  */
 final class Pdk extends Facade

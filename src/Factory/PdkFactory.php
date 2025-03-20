@@ -33,7 +33,8 @@ class PdkFactory
         $builder->addDefinitions(
             [
                 "api" => new Client($apiKey, $clientId),
-                PdkInterface::class => \DI\autowire(Pdk::class)
+                PdkInterface::class => \DI\autowire(Pdk::class),
+                "clientId" => $clientId
             ],
             $configs
         );
