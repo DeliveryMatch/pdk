@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "998054b0072337d7c4be8a3831b5da6b",
+    "content-hash": "9afdcc66c938b159cab2e463afb27c35",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -74,21 +74,21 @@
         },
         {
             "name": "deliverymatch/sdk",
-            "version": "dev-main",
+            "version": "v0.0.1.9999",
             "source": {
                 "type": "git",
                 "url": "https://github.com/DeliveryMatch/sdk.git",
-                "reference": "a40b5e6aab85b01566425f5f4d436857cb56f5b9"
+                "reference": "2001ce34fb55e12e6c0d1b9474269d37d493a3eb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DeliveryMatch/sdk/zipball/a40b5e6aab85b01566425f5f4d436857cb56f5b9",
-                "reference": "a40b5e6aab85b01566425f5f4d436857cb56f5b9",
+                "url": "https://api.github.com/repos/DeliveryMatch/sdk/zipball/2001ce34fb55e12e6c0d1b9474269d37d493a3eb",
+                "reference": "2001ce34fb55e12e6c0d1b9474269d37d493a3eb",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "php": ">=8.1",
+                "php": "^8.0",
                 "php-http/client-common": "^2.7",
                 "psr/http-client": "^1.0",
                 "psr/http-factory": "^1.1"
@@ -97,6 +97,7 @@
                 "ergebnis/phpstan-rules": "^2.6",
                 "friendsofphp/php-cs-fixer": "^3.67",
                 "laminas/laminas-diactoros": "^3.5",
+                "phabel/phabel": "1.0.58.80",
                 "php-http/curl-client": "^2.3",
                 "php-http/mock-client": "^1.6",
                 "phpro/grumphp": "^2.10",
@@ -104,8 +105,12 @@
                 "phpunit/phpunit": "^11.5",
                 "squizlabs/php_codesniffer": "^3.11"
             },
-            "default-branch": true,
             "type": "library",
+            "extra": {
+                "phabel": {
+                    "revision": 0
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "DeliveryMatch\\Sdk\\": "lib/DeliveryMatch"
@@ -114,9 +119,9 @@
             "notification-url": "https://packagist.org/downloads/",
             "support": {
                 "issues": "https://github.com/DeliveryMatch/sdk/issues",
-                "source": "https://github.com/DeliveryMatch/sdk/tree/main"
+                "source": "https://github.com/DeliveryMatch/sdk/tree/v0.0.1.9999"
             },
-            "time": "2025-03-19T15:50:26+00:00"
+            "time": "2025-03-21T12:01:27+00:00"
         },
         {
             "name": "laravel/serializable-closure",
@@ -3247,6 +3252,158 @@
             "time": "2024-03-12T13:22:30+00:00"
         },
         {
+            "name": "phabel/phabel",
+            "version": "1.0.58.80",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phabelio/phabel.git",
+                "reference": "039017c53a3a1ea87f3a1db13106f5855260ee7a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phabelio/phabel/zipball/039017c53a3a1ea87f3a1db13106f5855260ee7a",
+                "reference": "039017c53a3a1ea87f3a1db13106f5855260ee7a",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^2.0",
+                "ext-json": "*",
+                "ext-tokenizer": "*",
+                "php": ">=8.0"
+            },
+            "provide": {
+                "phabelio/phabel": "self.version"
+            },
+            "require-dev": {
+                "amphp/file": "^2.0",
+                "bamarni/composer-bin-plugin": "^1.4"
+            },
+            "bin": [
+                "bin/phabel"
+            ],
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Phabel\\Composer\\Plugin",
+                "plugin-modifies-downloads": true
+            },
+            "autoload": {
+                "files": [
+                    "src/guard.php",
+                    "vendor-bundle/amphp/amp/lib/functions.php",
+                    "vendor-bundle/amphp/amp/lib/Internal/functions.php",
+                    "vendor-bundle/amphp/byte-stream/lib/functions.php",
+                    "vendor-bundle/amphp/parallel/lib/Context/functions.php",
+                    "vendor-bundle/amphp/parallel/lib/Sync/functions.php",
+                    "vendor-bundle/amphp/parallel/lib/Worker/functions.php",
+                    "vendor-bundle/amphp/process/lib/functions.php",
+                    "vendor-bundle/amphp/serialization/src/functions.php",
+                    "vendor-bundle/amphp/sync/src/functions.php",
+                    "vendor-bundle/amphp/sync/src/ConcurrentIterator/functions.php",
+                    "vendor-bundle/symfony/deprecation-contracts/function.php",
+                    "vendor-bundle/symfony/polyfill-ctype/bootstrap.php",
+                    "vendor-bundle/symfony/polyfill-intl-grapheme/bootstrap.php",
+                    "vendor-bundle/symfony/polyfill-intl-normalizer/bootstrap.php",
+                    "vendor-bundle/symfony/polyfill-mbstring/bootstrap.php",
+                    "vendor-bundle/symfony/polyfill-php73/bootstrap.php",
+                    "vendor-bundle/symfony/polyfill-php80/bootstrap.php",
+                    "vendor-bundle/symfony/string/Resources/functions.php"
+                ],
+                "psr-4": {
+                    "Phabel\\": "src",
+                    "PhabelVendor\\Amp\\": [
+                        "vendor-bundle/amphp/amp/lib"
+                    ],
+                    "PhabelVendor\\Psr\\Log\\": [
+                        "vendor-bundle/psr/log/Psr/Log/"
+                    ],
+                    "PhabelVendor\\Amp\\Sync\\": [
+                        "vendor-bundle/amphp/sync/src"
+                    ],
+                    "PhabelVendor\\PhpParser\\": [
+                        "vendor-bundle/phabel/php-parser/lib/PhpParser"
+                    ],
+                    "Symfony\\Polyfill\\Ctype\\": [
+                        "vendor-bundle/symfony/polyfill-ctype/"
+                    ],
+                    "Symfony\\Polyfill\\Php73\\": [
+                        "vendor-bundle/symfony/polyfill-php73/"
+                    ],
+                    "Symfony\\Polyfill\\Php80\\": [
+                        "vendor-bundle/symfony/polyfill-php80/"
+                    ],
+                    "PhabelVendor\\Amp\\Parser\\": [
+                        "vendor-bundle/amphp/parser/lib"
+                    ],
+                    "PhabelVendor\\Amp\\Process\\": [
+                        "vendor-bundle/amphp/process/lib"
+                    ],
+                    "PhabelVendor\\Amp\\Parallel\\": [
+                        "vendor-bundle/amphp/parallel/lib"
+                    ],
+                    "Symfony\\Polyfill\\Mbstring\\": [
+                        "vendor-bundle/symfony/polyfill-mbstring/"
+                    ],
+                    "PhabelVendor\\Psr\\Container\\": [
+                        "vendor-bundle/psr/container/src/"
+                    ],
+                    "PhabelVendor\\Amp\\ByteStream\\": [
+                        "vendor-bundle/amphp/byte-stream/lib"
+                    ],
+                    "PhabelVendor\\Amp\\Serialization\\": [
+                        "vendor-bundle/amphp/serialization/src"
+                    ],
+                    "Symfony\\Polyfill\\Intl\\Grapheme\\": [
+                        "vendor-bundle/symfony/polyfill-intl-grapheme/"
+                    ],
+                    "Symfony\\Polyfill\\Intl\\Normalizer\\": [
+                        "vendor-bundle/symfony/polyfill-intl-normalizer/"
+                    ],
+                    "PhabelVendor\\PHPStan\\PhpDocParser\\": [
+                        "vendor-bundle/phpstan/phpdoc-parser/src/"
+                    ],
+                    "PhabelVendor\\Symfony\\Component\\String\\": [
+                        "vendor-bundle/symfony/string/"
+                    ],
+                    "PhabelVendor\\Symfony\\Component\\Console\\": [
+                        "vendor-bundle/symfony/console/"
+                    ],
+                    "PhabelVendor\\Symfony\\Component\\Process\\": [
+                        "vendor-bundle/symfony/process/"
+                    ],
+                    "PhabelVendor\\Symfony\\Contracts\\Service\\": [
+                        "vendor-bundle/symfony/service-contracts/"
+                    ]
+                },
+                "classmap": [
+                    "vendor-bundle/symfony/polyfill-intl-normalizer/Resources/stubs",
+                    "vendor-bundle/symfony/polyfill-php73/Resources/stubs",
+                    "vendor-bundle/symfony/polyfill-php80/Resources/stubs"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniil Gentili",
+                    "email": "daniil@daniil.it"
+                }
+            ],
+            "description": "Write and deploy modern PHP 8 code, today.",
+            "support": {
+                "issues": "https://github.com/phabelio/phabel/issues",
+                "source": "https://github.com/phabelio/phabel/tree/1.0.58.80"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/danog",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-10-08T14:47:44+00:00"
+        },
+        {
             "name": "phpro/grumphp",
             "version": "v2.11.0",
             "source": {
@@ -6068,9 +6225,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "deliverymatch/sdk": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
