@@ -9,13 +9,15 @@ use DeliveryMatch\Pdk\Common\Pdk;
 use DeliveryMatch\Pdk\Common\PdkInterface;
 use DeliveryMatch\Pdk\Facade\Facade;
 use DeliveryMatch\Sdk\Client;
+use DeliveryMatch\Sdk\HttpClient\ApiEnvironment;
 use DI\Container;
 use DI\ContainerBuilder;
+
 use function DI\value;
 
 class PdkFactory
 {
-    public static function create(int $clientId, string $apiKey, string $environment, Cache $cache, array $configs): PdkInterface
+    public static function create(int $clientId, string $apiKey, ApiEnvironment $environment, Cache $cache, array $configs): PdkInterface
     {
         $instance = new self();
         $container = $instance->setupContainer($clientId, $apiKey, $environment, $configs);
@@ -27,7 +29,7 @@ class PdkFactory
         return $pdk;
     }
 
-    private function setupContainer(int $clientId, string $apiKey, string $environment ,array $configs): Container
+    private function setupContainer(int $clientId, string $apiKey, ApiEnvironment $environment, array $configs): Container
     {
         $builder = new ContainerBuilder();
         $builder->useAutowiring(true);
@@ -36,7 +38,7 @@ class PdkFactory
             [
                 PdkInterface::class => \DI\autowire(Pdk::class),
                 "clientId" => value($clientId),
-                "api" => new Client($apiKey, $clientId, $environment === "production")
+                "api" => new Client($apiKey, $clientId, $environment)
             ]
         );
 

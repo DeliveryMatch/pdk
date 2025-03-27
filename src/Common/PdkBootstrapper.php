@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DeliveryMatch\Pdk\Common;
 
 use DeliveryMatch\Pdk\Factory\PdkFactory;
+use DeliveryMatch\Sdk\HttpClient\ApiEnvironment;
 
 class PdkBootstrapper implements PdkBootstrapperInterface
 {
@@ -15,7 +16,7 @@ class PdkBootstrapper implements PdkBootstrapperInterface
     {
     }
 
-    final public static function setup(int $clientId, string $apikey, string $environment, Cache $cache): PdkInterface
+    final public static function setup(int $clientId, string $apikey, ApiEnvironment $environment, Cache $cache): PdkInterface
     {
         if (self::$isInitialized) {
             return self::$pdk;
@@ -27,7 +28,13 @@ class PdkBootstrapper implements PdkBootstrapperInterface
         return self::$pdk;
     }
 
-    protected function createInstance(int $clientId, string $apikey, string $environment, Cache $cache): PdkInterface
+    final public static function uninitialize(): void
+    {
+        self::$isInitialized = false;
+    }
+
+
+    protected function createInstance(int $clientId, string $apikey, ApiEnvironment $environment, Cache $cache): PdkInterface
     {
         return PdkFactory::create($clientId, $apikey, $environment, $cache, $this->getAdditionalConfiguration());
     }

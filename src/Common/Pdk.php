@@ -178,7 +178,8 @@ class Pdk implements PdkInterface
         return true;
     }
 
-    public function updateShipmentToNew(int $shipmentId, ?string $orderNumber = null): bool {
+    public function updateShipmentToNew(int $shipmentId, ?string $orderNumber = null): bool
+    {
         $httpClient = $this->api()->getHttpClient();
 
         $request = [
