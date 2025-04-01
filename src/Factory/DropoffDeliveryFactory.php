@@ -43,7 +43,15 @@ class DropoffDeliveryFactory implements ShippingOptionFactory
             description: $method['serviceLevel']['description'],
             title: $method['name'],
             pickupWindow: $pickupWindow,
-            deliveryWindow: $deliveryWindow,
+            openingHours: new OpeningHours(
+                monday: new OpeningHour(from: $method["openinghours"]["1"]["from"], to: $method["openinghours"]["1"]["to"]),
+                tuesday: new OpeningHour(from: $method["openinghours"]["2"]["from"], to: $method["openinghours"]["2"]["to"]),
+                wednesday: new OpeningHour(from: $method["openinghours"]["3"]["from"], to: $method["openinghours"]["3"]["to"]),
+                thursday: new OpeningHour(from: $method["openinghours"]["4"]["from"], to: $method["openinghours"]["4"]["to"]),
+                friday: new OpeningHour(from: $method["openinghours"]["5"]["from"], to: $method["openinghours"]["5"]["to"]),
+                saturday: new OpeningHour(from: $method["openinghours"]["6"]["from"], to: $method["openinghours"]["6"]["to"]),
+                sunday: new OpeningHour(from: $method["openinghours"]["7"]["from"], to: $method["openinghours"]["7"]["to"]),
+            ),
             address: new Address(
                 street: $method["address"]["street"],
                 houseNumber: $method["address"]["number"],
@@ -53,15 +61,7 @@ class DropoffDeliveryFactory implements ShippingOptionFactory
                 latitude: $method["latitude"],
                 longitude: $method["longitude"],
             ),
-            openingHours: new OpeningHours(
-                monday: new OpeningHour(from: $method["openinghours"]["1"]["from"], to: $method["openinghours"]["1"]["to"]),
-                tuesday: new OpeningHour(from: $method["openinghours"]["2"]["from"], to: $method["openinghours"]["2"]["to"]),
-                wednesday: new OpeningHour(from: $method["openinghours"]["3"]["from"], to: $method["openinghours"]["3"]["to"]),
-                thursday: new OpeningHour(from: $method["openinghours"]["4"]["from"], to: $method["openinghours"]["4"]["to"]),
-                friday: new OpeningHour(from: $method["openinghours"]["5"]["from"], to: $method["openinghours"]["5"]["to"]),
-                saturday: new OpeningHour(from: $method["openinghours"]["6"]["from"], to: $method["openinghours"]["6"]["to"]),
-                sunday: new OpeningHour(from: $method["openinghours"]["7"]["from"], to: $method["openinghours"]["7"]["to"]),
-            )
+            deliveryWindow: $deliveryWindow
         );
     }
 }

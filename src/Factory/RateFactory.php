@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace DeliveryMatch\Pdk\Factory;
 
 use DateTimeImmutable;
-use DeliveryMatch\Pdk\Facade\PickupShippingFactory;
 use DeliveryMatch\Pdk\Model\DeliveryWindow;
 use DeliveryMatch\Pdk\Model\PickupWindow;
 use DeliveryMatch\Pdk\Model\Rates;
