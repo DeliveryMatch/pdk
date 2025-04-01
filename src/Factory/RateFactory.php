@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DeliveryMatch\Pdk\Factory;
 
 use DateTimeImmutable;
+use DeliveryMatch\Pdk\Facade\PickupShippingFactory;
 use DeliveryMatch\Pdk\Model\DeliveryWindow;
 use DeliveryMatch\Pdk\Model\PickupWindow;
 use DeliveryMatch\Pdk\Model\Rates;
@@ -14,7 +15,9 @@ class RateFactory
 {
     private const DATE_TIME_FORMAT = "Y-m-d H:i";
     private const FACTORIES = [
-        "shipmentMethods" => HomeDeliveryFactory::class
+        "shipmentMethods" => HomeDeliveryFactory::class,
+        "dropoffMethods" => DropoffDeliveryFactory::class,
+        "pickupMethods" => PickupShippingFactory::class,
     ];
 
     final public static function create(array $apiResponse): Rates
@@ -26,7 +29,7 @@ class RateFactory
         foreach (self::FACTORIES as $optionType => $factory) {
             $reflectionFactory = new ReflectionClass($factory);
 
-            if ($reflectionFactory->implementsInterface(ShippingOptionFactory::class)) {
+            if (!$reflectionFactory->implementsInterface(ShippingOptionFactory::class)) {
                 continue;
             }
 
