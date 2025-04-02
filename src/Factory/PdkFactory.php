@@ -17,12 +17,12 @@ use function DI\value;
 
 class PdkFactory
 {
-    public static function create(int $clientId, string $apiKey, ApiEnvironment $environment, Cache $cache, array $configs): PdkInterface
+    public static function create(int $clientId, string $apiKey, ApiEnvironment $environment, array $configs): PdkInterface
     {
         $instance = new self();
         $container = $instance->setupContainer($clientId, $apiKey, $environment, $configs);
 
-        $pdk = new Pdk($container, $cache);
+        $pdk = new Pdk($container, $container->get(Cache::class));
 
         Facade::setPdkInstance($pdk);
 
