@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DeliveryMatch\Pdk\Factory;
 
-use DeliveryMatch\Pdk\Common\Cache;
+use DeliveryMatch\Pdk\Common\Repository;
 use DeliveryMatch\Pdk\Common\Pdk;
 use DeliveryMatch\Pdk\Common\PdkInterface;
 use DeliveryMatch\Pdk\Facade\Facade;
@@ -22,7 +22,7 @@ class PdkFactory
         $instance = new self();
         $container = $instance->setupContainer($clientId, $apiKey, $environment, $configs);
 
-        $pdk = new Pdk($container, $container->get(Cache::class));
+        $pdk = new Pdk($container, $container->get(Repository::class));
 
         Facade::setPdkInstance($pdk);
 

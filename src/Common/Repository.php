@@ -6,7 +6,7 @@ namespace DeliveryMatch\Pdk\Common;
 
 use DeliveryMatch\Pdk\Model\ShippingOption;
 
-interface Cache
+interface Repository
 {
     public function setShipmentId(int $shipmentId): void;
     public function getShipmentId(): ?int;

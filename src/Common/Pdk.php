@@ -19,7 +19,7 @@ use JsonException;
 
 class Pdk implements PdkInterface
 {
-    public function __construct(protected Container $container, protected Cache $cache)
+    public function __construct(protected Container $container, protected Repository $cache)
     {
     }
 

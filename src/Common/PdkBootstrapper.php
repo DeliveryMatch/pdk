@@ -16,13 +16,13 @@ class PdkBootstrapper implements PdkBootstrapperInterface
     {
     }
 
-    final public static function setup(int $clientId, string $apikey, ApiEnvironment $environment, Cache $cache): PdkInterface
+    final public static function setup(int $clientId, string $apikey, ApiEnvironment $environment): PdkInterface
     {
         if (self::$isInitialized) {
             return self::$pdk;
         }
 
-        self::$pdk = (new static())->createInstance($clientId, $apikey, $environment, $cache);
+        self::$pdk = (new static())->createInstance($clientId, $apikey, $environment);
         self::$isInitialized = true;
 
         return self::$pdk;
@@ -34,9 +34,9 @@ class PdkBootstrapper implements PdkBootstrapperInterface
     }
 
 
-    protected function createInstance(int $clientId, string $apikey, ApiEnvironment $environment, Cache $cache): PdkInterface
+    protected function createInstance(int $clientId, string $apikey, ApiEnvironment $environment): PdkInterface
     {
-        return PdkFactory::create($clientId, $apikey, $environment, $cache, $this->getAdditionalConfiguration());
+        return PdkFactory::create($clientId, $apikey, $environment, $this->getAdditionalConfiguration());
     }
 
     protected function getAdditionalConfiguration(): array
