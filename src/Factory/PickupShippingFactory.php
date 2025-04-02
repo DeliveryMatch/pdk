@@ -34,7 +34,6 @@ class PickupShippingFactory implements ShippingOptionFactory
             ),
             configurationId: $method['configurationID'],
             tariffId: $method['tariffID'],
-            routeId: $method['routeID'],
             price: new Price(
                 buy: $method['price_buy'],
                 sell: $method['price_sell'],
