@@ -29,9 +29,9 @@ class PickupShippingFactory implements ShippingOptionFactory
                 code: $method['carrier']['code'],
             ),
             serviceLevel: new ServiceLevel(
-                id: $method['serviceLevel']['id'],
-                name: $method['serviceLevel']['name'],
-                description: $method['serviceLevel']['description'],
+                id: $method['service']['id'],
+                name: $method['service']['name'],
+                description: $method['service']['description'],
             ),
             configurationId: $method['configurationID'],
             tariffId: $method['tariffID'],
