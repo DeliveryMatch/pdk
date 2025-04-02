@@ -13,11 +13,11 @@ abstract class ShippingOption
         public readonly ServiceLevel $serviceLevel,
         public readonly int $configurationId,
         public readonly int $tariffId,
-        public readonly int $routeId,
         public readonly Price $price,
         public readonly string $description,
         public readonly string $title,
         public readonly PickupWindow $pickupWindow,
+        public readonly ?int $routeId = null,
         public readonly ?DeliveryWindow $deliveryWindow = null,
     ) {
 

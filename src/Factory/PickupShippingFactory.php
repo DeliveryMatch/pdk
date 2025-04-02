@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace DeliveryMatch\Pdk\Factory;
 
-use DeliveryMatch\Pdk\Factory\ShippingOptionFactory;
 use DeliveryMatch\Pdk\Model\Address;
 use DeliveryMatch\Pdk\Model\Carrier;
 use DeliveryMatch\Pdk\Model\PickupWindow;

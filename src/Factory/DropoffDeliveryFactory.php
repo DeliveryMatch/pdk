@@ -34,7 +34,6 @@ class DropoffDeliveryFactory implements ShippingOptionFactory
             ),
             configurationId: $method['configurationID'],
             tariffId: $method['tariffID'],
-            routeId: $method['routeID'],
             price: new Price(
                 buy: $method['buy_price'],
                 sell: $method['price'],
