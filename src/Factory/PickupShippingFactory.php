@@ -59,8 +59,8 @@ class PickupShippingFactory implements ShippingOptionFactory
                 city: $method["address"]["city"],
                 country: $method["address"]["country"],
                 postcode: $method["address"]["postcode"],
-                latitude: $method["latitude"],
-                longitude: $method["longitude"],
+                latitude: $method["address"]["latitude"],
+                longitude: $method["address"]["longitude"],
             ),
             deliveryWindow: $deliveryWindow
         );
