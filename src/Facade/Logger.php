@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DeliveryMatch\Pdk\Facade;
 
-use DeliveryMatch\Pdk\Logger\LoggerInterface;
+use Psr\Log\LoggerInterface;
 
 /**
  * @method static void log($level, $message, array $context = [])
