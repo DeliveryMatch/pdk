@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace DeliveryMatch\Pdk\Factory;
 
 use DateTimeImmutable;
+use DeliveryMatch\Pdk\Facade\Logger;
 use DeliveryMatch\Pdk\Model\DeliveryWindow;
 use DeliveryMatch\Pdk\Model\PickupWindow;
 use DeliveryMatch\Pdk\Model\Rates;
 use ReflectionClass;
+use Throwable;
 
 class RateFactory
 {
@@ -48,9 +50,13 @@ class RateFactory
                         $method["timeTo"] ?? null
                     );
 
-                    $option = $factory::create($method, new PickupWindow($pickupDate, $cutoffDate), $deliveryWindow);
-
-                    $rates->addShippingOption($option);
+                    try {
+                        $option = $factory::create($method, new PickupWindow($pickupDate, $cutoffDate), $deliveryWindow);
+                        $rates->addShippingOption($option);
+                    } catch (Throwable $e) {
+                        Logger::error("Could not option to correct class. factory=$factory {$method['methodID']}");
+                        continue;
+                    }
                 }
             }
         }

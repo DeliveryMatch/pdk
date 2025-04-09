@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DeliveryMatch\Pdk\Common;
 
+use DeliveryMatch\Pdk\Facade\Logger;
 use DeliveryMatch\Pdk\Factory\RateFactory;
 use DeliveryMatch\Pdk\Model\Rates;
 use DeliveryMatch\Pdk\Model\ShippingOption;
@@ -52,7 +53,8 @@ class Pdk implements PdkInterface
 
         try {
             $api->me()->isAuthenticated();
-        } catch (DeliveryMatchApiException) {
+        } catch (DeliveryMatchApiException $e) {
+            Logger::warning("Could not connect with DeliveryMatch API. Please check API credentials. Message: {$e->getMessage()}");
             return false;
         }
 
@@ -98,12 +100,14 @@ class Pdk implements PdkInterface
         $shipmentId = $this->cache->getShipmentId();
 
         if ($shippingOption === null || $shipmentId === null) {
+            Logger::warning("No shipping option found when trying to add option to shipment");
             return false;
         }
 
         try {
             $api->shipments()->selectMethod($shipmentId, $shippingOption->methodId);
         } catch (DeliveryMatchApiException $e) {
+            Logger::error("Could not update shipment method in DeliveryMatch. shipment_id=$shipmentId, methodId={$shippingOption->methodId}, message={$e->getMessage()}");
             return false;
         }
 
@@ -129,6 +133,7 @@ class Pdk implements PdkInterface
         try {
             $this->api()->post("/updateShipment", body: $request);
         } catch (DeliveryMatchApiException $e) {
+            Logger::error("Could not update shipment to NEW in DeliveryMatch. shipment_id=$shipmentId, orderNumber={$orderNumber}, message={$e->getMessage()}");
             return false;
         }
 
