@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DeliveryMatch\Pdk\Facade;
 
-use Psr\Log\LoggerInterface;
+use DeliveryMatch\Pdk\Logger\PdkLoggerInterface;
 
 /**
  * @method static void log($level, $message, array $context = [])
@@ -16,12 +16,12 @@ use Psr\Log\LoggerInterface;
  * @method static void info($message, array $context = [])
  * @method static void notice($message, array $context = [])
  * @method static void warning($message, array $context = [])
- * @see \Psr\Log\LoggerInterface
+ * @see \DeliveryMatch\Pdk\Logger\PdkLoggerInterface
  */
 final class Logger extends Facade
 {
     protected static function getFacadeAccessor(): string
     {
-        return LoggerInterface::class;
+        return PdkLoggerInterface::class;
     }
 }
