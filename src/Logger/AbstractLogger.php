@@ -10,7 +10,7 @@ use Stringable;
 
 abstract class AbstractLogger implements LoggerInterface
 {
-    abstract public function log($level, string|\Stringable $message, array $context = []): void;
+    abstract public function log($level, string|Stringable $message, array $context = []): void;
 
     public function alert(string|Stringable $message, array $context = []): void
     {
