@@ -15,6 +15,7 @@ use DeliveryMatch\Pdk\Common\PdkInterface;
  * @method static void setSelectedOption(string $checkId)
  * @method static bool addShippingOptionToShipment()
  * @method static bool updateShipmentToNew(int $shipmentId, ?string $orderNumber = null)
+ * @method static array bookShipment(int $shipmentId)
  * @see \DeliveryMatch\Pdk\Common\Pdk
  */
 final class Pdk extends Facade

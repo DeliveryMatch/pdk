@@ -139,4 +139,24 @@ class Pdk implements PdkInterface
 
         return true;
     }
+
+    public function bookShipment(int $shipmentId): array
+    {
+        $request = [
+            "client" => [
+                "id" => $this->get("clientId"),
+                "action" => "book",
+            ],
+            "shipment" => [
+                "id" => $shipmentId
+            ]
+        ];
+
+        try {
+            return $this->api()->post("/updateShipment", body: $request);
+        } catch (DeliveryMatchApiException $e) {
+            Logger::error("Could not book shipment $shipmentId. Error: {$e->getMessage()}");
+            throw $e;
+        }
+    }
 }
