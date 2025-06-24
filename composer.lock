@@ -78,12 +78,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/DeliveryMatch/sdk.git",
-                "reference": "3dff8f411ca3f6efc50f8b68344577aa446e9934"
+                "reference": "edcf00bb878c1ea98822058fd73346282e7420c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DeliveryMatch/sdk/zipball/3dff8f411ca3f6efc50f8b68344577aa446e9934",
-                "reference": "3dff8f411ca3f6efc50f8b68344577aa446e9934",
+                "url": "https://api.github.com/repos/DeliveryMatch/sdk/zipball/edcf00bb878c1ea98822058fd73346282e7420c5",
+                "reference": "edcf00bb878c1ea98822058fd73346282e7420c5",
                 "shasum": ""
             },
             "require": {
@@ -122,7 +122,7 @@
                 "issues": "https://github.com/DeliveryMatch/sdk/issues",
                 "source": "https://github.com/DeliveryMatch/sdk/tree/v1.0.0"
             },
-            "time": "2025-06-24T07:58:01+00:00"
+            "time": "2025-06-24T10:09:50+00:00"
         },
         {
             "name": "laravel/serializable-closure",
