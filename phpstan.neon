@@ -38,6 +38,8 @@ parameters:
             enabled: false
         noSwitch:
             enabled: false
+        noNamedArgument:
+            enabled: false
     ignoreErrors:
         -
             identifier: missingType.iterableValue

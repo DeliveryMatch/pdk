@@ -16,9 +16,11 @@ use DI\DependencyException;
 use DI\NotFoundException;
 use Http\Client\Exception;
 use JsonException;
+use Throwable;
 
 class Pdk implements PdkInterface
 {
+    private const UNDIFINED_SHIPMENT_STATE = -1;
     public function __construct(protected Container $container, protected Repository $cache)
     {
     }
@@ -67,18 +69,37 @@ class Pdk implements PdkInterface
      */
     public function fetchShippingOptions(ShipmentRequest $request): Rates
     {
-        $api = $this->api();
-
-        $response = $request->hasIdentifier()
-            ? $api->shipments()->update($request)
-            : $api->shipments()->insert($request);
-
-        $rates = RateFactory::create($response);
+        $rates = $this->getRates($request);
 
         $this->cache->setShipmentId($rates->shipmentId);
         $this->cache->setShippingOptions($rates->getShippingOptions());
 
         return $rates;
+    }
+
+    private function getRates(ShipmentRequest $request): Rates
+    {
+        $api = $this->api();
+
+        try {
+            $response = $request->hasIdentifier()
+                ? $api->shipments()->update($request)
+                : $api->shipments()->insert($request);
+
+            return RateFactory::create($response);
+        } catch (DeliveryMatchApiException $e) {
+            Logger::error("Could not fetch shipping options from DeliveryMatch. Error: {$e->getMessage()}");
+
+            if (in_array($e->getMessage(), ["Only drafts or new shipments can be updated", "Shipment not found"])) {
+                $this->cache->setShipmentId(self::UNDIFINED_SHIPMENT_STATE);
+                return $this->getRates($request->copyWithoutId());
+            }
+
+            return new Rates($request->shipment->id ?? self::UNDIFINED_SHIPMENT_STATE);
+        } catch (Throwable $e) {
+            Logger::emergency("Unexpected error while getting rates. {$e->getMessage()} at {$e->getFile()}:{$e->getLine()}");
+            return new Rates($request->shipment->id ?? self::UNDIFINED_SHIPMENT_STATE);
+        }
     }
 
     public function findShippingOption(): ?ShippingOption
