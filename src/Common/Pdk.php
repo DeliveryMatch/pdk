@@ -49,6 +49,14 @@ class Pdk implements PdkInterface
         return $this->container->get("api");
     }
 
+    /**
+     * @return ShippingOption[]
+     */
+    public function getCachedOptions(): array
+    {
+        return $this->cache->getShippingOptions();
+    }
+
     public function checkConnection(): bool
     {
         $api = $this->api();
