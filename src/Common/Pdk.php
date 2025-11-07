@@ -143,7 +143,7 @@ class Pdk implements PdkInterface
         return true;
     }
 
-    public function updateShipmentToNew(int $shipmentId, ?string $orderNumber = null): bool
+    public function updateShipmentToNew(int $shipmentId, ?string $orderNumber = null, ?string $reference = null): bool
     {
         $request = [
             "client" => [
@@ -157,6 +157,11 @@ class Pdk implements PdkInterface
 
         if ($orderNumber !== null) {
             $request["shipment"]["orderNumber"] = $orderNumber;
+        }
+
+
+        if ($reference !== null) {
+            $request["shipment"]["reference"] = $reference;
         }
 
         try {

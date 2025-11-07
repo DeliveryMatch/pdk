@@ -14,7 +14,7 @@ use DeliveryMatch\Pdk\Common\PdkInterface;
  * @method static \DeliveryMatch\Pdk\Model\ShippingOption|null findShippingOption()
  * @method static void setSelectedOption(string $checkId)
  * @method static bool addShippingOptionToShipment()
- * @method static bool updateShipmentToNew(int $shipmentId, ?string $orderNumber = null)
+ * @method static bool updateShipmentToNew(int $shipmentId, ?string $orderNumber = null, ?string $reference = null)
  * @method static array bookShipment(int $shipmentId)
  * @method static array getCachedOptions()
  * @see \DeliveryMatch\Pdk\Common\Pdk
