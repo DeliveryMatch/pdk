@@ -112,9 +112,11 @@ class Pdk implements PdkInterface
 
     public function findShippingOption(): ?ShippingOption
     {
-        $shippingOption = current(array_filter($this->cache->getShippingOptions(), fn (ShippingOption $option) => $option->checkId === $this->cache->getCheckId()));
+        $checkId = $this->cache->getCheckId();
+        $shippingOption = current(array_filter($this->cache->getShippingOptions(), fn (ShippingOption $option) => $option->checkId === $checkId));
 
         if (!$shippingOption) {
+            Logger::warning("No matiching shipping option found. checkId=$checkId");
             return null;
         }
 
@@ -129,7 +131,7 @@ class Pdk implements PdkInterface
         $shipmentId = $this->cache->getShipmentId();
 
         if ($shippingOption === null || $shipmentId === null) {
-            Logger::warning("No shipping option found when trying to add option to shipment");
+            Logger::warning("No shipping option found when trying to add option to shipment. shipment_id=$shipmentId, shippingOptions=$shippingOption");
             return false;
         }
 
