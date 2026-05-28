@@ -9,7 +9,6 @@ use DeliveryMatch\Pdk\Model\Carrier;
 use DeliveryMatch\Pdk\Model\PickupWindow;
 use DeliveryMatch\Pdk\Model\DeliveryWindow;
 use DeliveryMatch\Pdk\Model\DropoffDeliveryOption;
-use DeliveryMatch\Pdk\Model\OpeningHour;
 use DeliveryMatch\Pdk\Model\OpeningHours;
 use DeliveryMatch\Pdk\Model\Price;
 use DeliveryMatch\Pdk\Model\ServiceLevel;
@@ -42,15 +41,7 @@ class DropoffDeliveryFactory implements ShippingOptionFactory
             description: $method['serviceLevel']['description'],
             title: $method['name'],
             pickupWindow: $pickupWindow,
-            openingHours: new OpeningHours(
-                monday: new OpeningHour(from: $method["openinghours"]["1"]["from"], to: $method["openinghours"]["1"]["to"]),
-                tuesday: new OpeningHour(from: $method["openinghours"]["2"]["from"], to: $method["openinghours"]["2"]["to"]),
-                wednesday: new OpeningHour(from: $method["openinghours"]["3"]["from"], to: $method["openinghours"]["3"]["to"]),
-                thursday: new OpeningHour(from: $method["openinghours"]["4"]["from"], to: $method["openinghours"]["4"]["to"]),
-                friday: new OpeningHour(from: $method["openinghours"]["5"]["from"], to: $method["openinghours"]["5"]["to"]),
-                saturday: new OpeningHour(from: $method["openinghours"]["6"]["from"], to: $method["openinghours"]["6"]["to"]),
-                sunday: new OpeningHour(from: $method["openinghours"]["7"]["from"], to: $method["openinghours"]["7"]["to"]),
-            ),
+            openingHours: OpeningHours::fromApiResponse($method["openinghours"]),
             address: new Address(
                 street: $method["address"]["street"],
                 houseNumber: $method["address"]["number"],
